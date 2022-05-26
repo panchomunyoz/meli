@@ -78,7 +78,6 @@ def validRequestIp(path, client_ip, date):
  
     setValues(keyConsulta, str(json.dumps(dataConsulta)))
     saveReq(client_ip,date)
-    print(client_ip)
     
     result['success'] = True
     result['message'] = 'Exito'

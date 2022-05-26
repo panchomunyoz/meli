@@ -13,6 +13,7 @@ import urllib.request as urllib2
 from django.http import StreamingHttpResponse
 from .redis_utils import setValues, getValues, validRequestPath, validRequestIp
 
+@csrf_exempt
 def proxyViews(request, metodo, metodo_id):
 
     if metodo == 'limitar':
@@ -67,7 +68,7 @@ def limitarViews(request):
         return JsonResponse({'success':False, 'message':'limite debe ser entero mayor a cero'})
         
     setValues('limit-' + str(data['path']), data['limit'])
-    return JsonResponse({'succes': True, 'message':'se ha configurado limite para ' + str(data['path']) + ' exitosamente con valor' + str(data['limit'])})
+    return JsonResponse({'success': True, 'message':'se ha configurado limite para ' + str(data['path']) + ' exitosamente con valor ' + str(data['limit'])})
 
 
 @csrf_exempt

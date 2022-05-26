@@ -22,7 +22,6 @@ from django.views.generic import RedirectView
 
 
 urlpatterns = [
-    # url(r'', RedirectView.as_view(url='/categories/metodo/(?P<category_id>.*)$')),
     path('admin/', admin.site.urls),
     url(r'', include('categories.urls')),
 ]

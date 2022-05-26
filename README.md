@@ -5,6 +5,12 @@ pip install Django
 pip install redis
 pip install requests
 
+Install Redis on Linux:
+https://redis.io/docs/getting-started/installation/install-redis-on-linux/
+
+
+Levantar servicio Redis:
+sudo service redis-server start
 
 Proxy demo para challenge Mercado Libre
 
@@ -19,5 +25,4 @@ curl -i -H "Content-Type: application/json" -X POST -d '{"path":"/categories/MLA
 
 
 Consulta a endpoint ejemplo:
-curl http://localhost:8000/categories/MLAASDS
-
+curl http://localhost:3000/categories/MLAASDS
