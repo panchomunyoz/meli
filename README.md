@@ -4,6 +4,7 @@ Requisitos:
 pip install Django
 pip install redis
 pip install requests
+pip insttall celery
 
 Install Redis on Linux:
 https://redis.io/docs/getting-started/installation/install-redis-on-linux/
@@ -11,6 +12,12 @@ https://redis.io/docs/getting-started/installation/install-redis-on-linux/
 
 Levantar servicio Redis:
 sudo service redis-server start
+
+Celery:
+https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html
+
+Inicializar celery:
+celery -A meli_proxy worker -l INFO
 
 Proxy demo para challenge Mercado Libre
 

@@ -13,6 +13,9 @@ import urllib.request as urllib2
 from django.http import StreamingHttpResponse
 from .redis_utils import setValues, getValues, validRequestPath, validRequestIp
 
+from .task import addConn
+from .utils import estadistica
+
 @csrf_exempt
 def proxyViews(request, metodo, metodo_id):
 
@@ -45,7 +48,7 @@ def proxyViews(request, metodo, metodo_id):
     if validReqByIp['success'] == False:
         return JsonResponse(validReqByIp)
     
-    
+    addConn.delay(path, client_ip, now)
     response = requests.get(url, stream=True, headers={'user-agent': request.headers.get('user-agent')})
     return StreamingHttpResponse(
         response.raw,
@@ -87,28 +90,11 @@ def setPathViews(request):
 
 @csrf_exempt
 def estadisticasViews(request):
-    result = {}
-    datos = []
     if request.content_type == 'application/json':
         data = json.loads(request.body)
     else:
         data = request.GET
     
-    
-    if 'path' in data:
-        values = getValues(data['path'])
-        
-        cantidad = len(values) if values != None else 0
-        datos = [{'path':data['path'], 'cantidad':cantidad}]
-        result['path']= datos
-        
-    if 'ip' in data:
-        values = getValues(data['ip'])
-        
-        cantidad = len(values) if values != None else 0
-        datos = [{'ip':data['ip'], 'cantidad':cantidad}]
-        result['ip']= datos
-        
-        
+    result = estadistica(data)
         
     return JsonResponse(result)
